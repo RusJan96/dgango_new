@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список заявок</title>
+</head>
+<body>
+    <h1>Список заявок</h1>
+    <ul>
+        {% for request in requests %}
+            <li>{{ request.name }} - {{ request.email }} - {{ request.message }} - {{ request.submitted_at }}</li>
+        {% empty %}
+            <li>Нет заявок.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_request' %}">Оставить заявку</a>
+</body>
+</html>
