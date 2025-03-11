@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Blog in IT_company {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include 'partials/header.html' %}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    {% include 'partials/footer.html' %}
+</body>
+</html>
