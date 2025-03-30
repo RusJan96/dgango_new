@@ -1,0 +1,33 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Фильтр Сеансов</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Фильтр Сеансов</h1>
+    <form method="get" action="{% url 'filter_sessions' %}">
+        <label for="movie">Movie:</label>
+        <select name="movie" id="movie">
+            <option value="">All</option>
+            {% for movie in movies %}
+                <option value="{{ movie.id }}" {% if movie_id|add:"0" == movie.id %}selected{% endif %}>{{ movie.title }}</option>
+            {% endfor %}
+        </select>
+        <label for="hall">Зал:</label>
+        <select name="hall" id="hall">
+            <option value="">All</option>
+            {% for hall in halls %}
+                <option value="{{ hall.id }}" {% if hall_id|add:"0" == hall.id %}selected{% endif %}>{{ hall.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Фильтр</button>
+    </form>
+    <ul>
+        {% for session in sessions %}
+            <li>{{ session.movie.title }} - {{ session.show_time }} - {{ session.hall.name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

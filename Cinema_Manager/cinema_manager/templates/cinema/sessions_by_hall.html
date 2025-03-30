@@ -1,0 +1,17 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Сеансы для зала </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Сеансы для зала зала {{ hall_id }}</h1>
+    <ul>
+        {% for session in sessions %}
+            <li>{{ session.movie.title }} - {{ session.show_time }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
