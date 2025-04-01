@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Фильмы</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Фильм</h1>
+    <a href="{% url 'movie_create' %}">Добавить фильм</a>
+    <ul>
+        {% for movie in movies %}
+            <li>
+                <a href="{% url 'movie_detail' movie.id %}">{{ movie.title }}</a>
+                <a href="{% url 'movie_update' movie.id %}">Редактировать</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

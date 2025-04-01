@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Детали Бронирования</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Детали Бронирования</h1>
+    <p>Имя клиента: {{ booking.customer_name }}</p>
+    <p>Номер билета: {{ booking.number_of_tickets }}</p>
+    <p>Общая стоимость: {{ booking.total_price }} RUB</p>
+    <p>Бронирование времени: {{ booking.booking_time }}</p>
+    <a href="{% url 'booking_list' %}">Вернуться к бронированию</a>
+</body>
+</html>

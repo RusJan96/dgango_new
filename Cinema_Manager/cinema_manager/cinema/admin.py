@@ -14,10 +14,10 @@ class SessionAdmin(admin.ModelAdmin):
     list_display = ('movie', 'hall', 'show_time')
     list_filter = ('movie', 'hall', 'show_time')
 
-# @admin.register(Booking)
-# class BookingAdmin(admin.ModelAdmin):
-#     list_display = ('customer_name', 'session', 'number_of_tickets', 'booking_time', 'total_price')
-#     list_filter = ('session__movie', 'session__hall', 'booking_time')
-#     search_fields = ('customer_name',)    
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('customer_name', 'session', 'number_of_tickets', 'booking_time', 'total_price')
+    list_filter = ('session__movie', 'session__hall', 'booking_time')
+    search_fields = ('customer_name',)    
 
 # Register your models here.

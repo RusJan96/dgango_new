@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Бронирование</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Бронирование</h1>
+    <a href="{% url 'booking_create' session_id=session.id %}">Add Booking</a>
+    <ul>
+        {% for booking in bookings %}
+            <li>
+                <a href="{% url 'booking_detail' booking.id %}">{{ booking.customer_name }}</a>
+                <a href="{% url 'booking_update' booking.id %}">Edit</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Успешное бранирование</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Бронирование завершено</h1>
+    <p>Спасибо, {{ booking.customer_name }}, за бронирование {{ booking.number_of_tickets }} билетов на {{ booking.session.movie.title }}.</p>
+    <p>Цена: {{ booking.total_price }} Руб</p>
+    <a href="{% url 'upcoming_sessions' %}">Вернуться к предстоящим сессиям</a>
+</body>
+</html>

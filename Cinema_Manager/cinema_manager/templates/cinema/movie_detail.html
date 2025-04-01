@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ movie.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>{{ movie.title }}</h1>
+    <p>Продолжительность: {{ movie.duration }} minutes</p>
+    <p>Жанр: {{ movie.genre }}</p>
+    <p>Дата выпуска: {{ movie.release_date }}</p>
+    <a href="{% url 'movie_list' %}">Вернуться к фильмам</a>
+</body>
+</html>
