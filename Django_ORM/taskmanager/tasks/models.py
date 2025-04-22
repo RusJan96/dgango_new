@@ -19,6 +19,7 @@ class User(AbstractUser):
   class Meta:
     verbose_name = 'пользователь'
     verbose_name_plural = 'пользователи'
+   
 
   firstname = models.CharField(max_length=100, verbose_name='Имя')
   lastname = models.CharField(max_length=100, verbose_name='Фамилия')
@@ -50,9 +51,12 @@ class Task(models.Model):
   due_date = models.DateField(verbose_name='Срок выполнения')
   project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='Проект')
   performers = models.ManyToManyField(User, verbose_name='Исполнители')
+  comment = models.TextField(blank=True, verbose_name='Коментарий')
 
   def __str__(self):
     return f'{self.title} ({self.status})'
+
+    
 # class Project(models.Model):
 #   name = models.CharField(max_length=100)
 #   description = models.TextField()

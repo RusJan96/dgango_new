@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,7 @@
 </head>
 <body>
     <h1>Бронирование</h1>
-    <a href="{% url 'booking_create' session_id=session.id %}">Add Booking</a>
+    {% comment %} <a href="{% url 'booking_create' session.id %}">Add Booking</a> {% endcomment %}
     <ul>
         {% for booking in bookings %}
             <li>

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>Список Исполнителей</h1>
+  <p class="mb-5 text-body-secondary">Все исполнители</p>
+  <div class="row flex-column gap-4 align-items-center">
+    {% for task in tasks %}
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-2">
+              <h5 class="card-title">{{ task.title }}</h5>
+              <span class="badge text-bg-dark mb-1">{{ task.project.name }}</span>
+            </div>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ task.status }} - {{ task.due_date }}</h6>
+            <pre class="card-text">{{ task.description }}</pre>
+            <a href="{% url 'users' users.id %}" class="card-link">Посмотреть исполнителя</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Еще нет исполнителей</h5>
+            {% comment %} <h6 class="card-subtitle mb-2 text-body-secondary">Смотрю вы любите отдыхать...</h6>
+            <p class="card-text">Всем известно, что слона проще есть по частям</p> {% endcomment %}
+            <a href="{% url 'create_user' %}" class="card-link">Создать исполнителя</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

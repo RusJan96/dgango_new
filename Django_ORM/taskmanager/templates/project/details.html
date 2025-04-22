@@ -14,7 +14,7 @@
             <h5 class="card-title">{{ task.title }}</h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">{{ task.status }} - {{ task.due_date }}</h6>
             <pre class="card-text">{{ task.description }}</pre>
-            <a href="#" class="card-link">Посмотреть задачу</a>
+            <a href="{% url 'task' task.id %}" class="card-link">Посмотреть задачу</a>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
             <h5 class="card-title">Еще нет задач</h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">Смотрю вы любите отдыхать...</h6>
             <p class="card-text">Всем известно, что слона проще есть по частям</p>
-            <a href='{%url 'create_task'%}' class="card-link">Создать задачу</a> 
+            <a href="{% url 'tasks_create' %}" class="card-link">Создать задачу</a> 
           </div>
         </div>
       </div>

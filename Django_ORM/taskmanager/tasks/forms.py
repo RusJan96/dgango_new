@@ -6,11 +6,19 @@ from django import forms
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'email']   #  name в коментах 
+        fields = ['username', 'firstname','lastname','password','email'] 
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя пользователя'}),
-            # 'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'}),
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'логин'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+            'firstname': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'}),
+            'lastname': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Фамилия'}),
+            'password': forms.PasswordInput(attrs={
+        'class': 'form-control',
+        'id': 'floatingPassword',
+        'placeholder': 'Пароль',
+        'required': True
+        })
+            # 'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
         }
 
 class ProjectForm(forms.ModelForm):
@@ -46,12 +54,13 @@ class ProjectForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['title', 'description', 'project', 'performers']
+        fields = ['title', 'description', 'project', 'performers', 'comment']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Заголовок задачи'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Описание задачи'}),
             'project': forms.Select(attrs={'class': 'form-control'}),
-            'performers': forms.Select(attrs={'class': 'form-control'}),
+            'performers': forms.SelectMultiple(attrs={'class': 'form-control', 'style': 'min-height: 150px;'}),
+            'comment': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Комментарий'})
         }
 
 class TaskCreateForm(forms.ModelForm):
@@ -89,17 +98,18 @@ class TaskCreateForm(forms.ModelForm):
 
 
 
-class TaskForm(forms.ModelForm):
-	class Meta:
-		model = Task
-		fields = ['project', 'title', 'description', 'due_date', 'status']  # Все поля, которые можно редактировать
-		widgets = {
-			'project': forms.Select(attrs={'class': 'form-select'}),
-			'title': forms.TextInput(attrs={'class': 'form-control'}),
-			'description': forms.Textarea(attrs={'class': 'form-control'}),
-			'due_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-			'status': forms.Select(attrs={'class': 'form-select'}),
-		}    
+# class TaskForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Task
+# 		fields = ['project', 'title', 'description', 'due_date', 'status', 'comment']  # Все поля, которые можно редактировать
+# 		widgets = {
+# 			'project': forms.Select(attrs={'class': 'form-select'}),
+# 			'title': forms.TextInput(attrs={'class': 'form-control'}),
+# 			'description': forms.Textarea(attrs={'class': 'form-control'}),
+# 			'due_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+# 			'status': forms.Select(attrs={'class': 'form-select'}),
+#       'comment':forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Комментарий '}),
+# 		}    
 
 
 

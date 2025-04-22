@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="mb-5">Редактирование задачи: {{ task.title }}</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+            {{ form.project }}
+            {{ form.project.label_tag }}
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.title }}
+            {{ form.title.label_tag }}
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.description }}
+            {{ form.description.label_tag }}
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.due_date }}
+            {{ form.due_date.label_tag }}
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.status }}
+            {{ form.status.label_tag }}
+        </div>
+
+        <div class="form-floating mb-3">
+            {{ form.performers }}
+            {{ form.performers.label_tag }}
+        </div>
+
+        <div class="form-floating mb-3">
+            {{ form.comment }}
+            {{ form.comment.label_tag }}
+        </div>
+        {% comment %} <label for="id_comment">Комментарий:</label>
+            
+            {% if form.comment.errors %}
+                <div class="text-danger">
+                    {{ form.comment.errors }}
+                </div>
+            {% endif %} {% endcomment %}
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <a href="{% url 'tasks' %}" class="btn btn-secondary">Отмена</a>
+    {% comment %} </form>
+
+    <input type="submit" name="_save" class="default" value="{% trans 'Save' %}"/> {% endcomment %}
+    
+    {% comment %} </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="#" class="btn btn-secondary"> </a>
+
+    <input type="submit" name="_save" class="default" value="{% trans 'Save' %}"/>
+            </p>
+    </form> {% endcomment %}
+{% endblock %}

@@ -1,0 +1,42 @@
+
+<!-- templates/carservice/service_detail.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Детали автосервиса{% endblock %}
+
+{% block content %}
+    <h1>{{ service.name }}</h1>
+    <p>{{ service.description }}</p>
+    <h3>Рейтинг: {{ service.rating }}</h3>
+    <h3>Отзывы:</h3>
+    <ul>
+        {% for review in reviews %}
+            <li>{{ review.user.username }}: {{ review.comment }} ({{ review.rating }}/5)</li>
+        {% endfor %}
+    </ul>
+    <h3>Виды ремонта и цены:</h3>
+    <ul>
+        {% for repair in repairs %}
+            <li>{{ repair.repair_type.name }} - {{ repair.price }} руб.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+{% comment %} {% extends 'base.html' %}
+{%load static %}
+
+
+{% block title %}Детали сервиса{% endblock %}
+
+{% block content %}
+    <h1>{{ service.name }}</h1>
+    <h3>Виды ремонта:</h3>
+    <ul>
+        {% for repair in repairs %}
+            <li>{{ repair.repair_type.name }} - {{ repair.price }} руб.</li>
+        {% endfor %}
+    </ul>
+{% endblock %} {% endcomment %}

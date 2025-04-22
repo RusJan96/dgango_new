@@ -8,8 +8,18 @@
       <div class="col-6">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">{{ performer.username }}</h5>
+
+
+
+            <a href="{% url 'performer' performer.id %}" class="card-link">Посмотреть Исполнителя</a>
+
+            <ol>
+            <button type="submit" class="btn btn-primary"><h5 class="card-title">{{ performer.username }}</h5></button>
+            </ol>
+            {% comment %} <h5 class="card-title">{{ performer.username }}</h5> {% endcomment %}
             <h6 class="card-subtitle mb-2 text-body-secondary">{{ performer.email}}</h6>
+
+
           </div>
         </div>
       </div>
@@ -20,7 +30,7 @@
             <h5 class="card-title">Еще нет исполнителей</h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">Если вы работаете один, то вы либо дурак, либо сверхчеловек</h6>
             <p class="card-text">Каждой задаче требуется ответственный исполнитель, иначе она просто не будет выполняться</p>
-            <a href="#" class="card-link">Создать исполнителя</a>
+            <a href="{% url 'create_user' %}" class="card-link">Создать исполнителя</a>
           </div>
         </div>
       </div>

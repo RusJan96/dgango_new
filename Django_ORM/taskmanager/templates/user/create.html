@@ -1,0 +1,61 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Создать исполнителя{% endblock %}
+
+{% block content %}
+    <h2>Создать исполнителя</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_name">Имя исполнителя:</label>
+            {{ form.firstname }}
+            {% if form.firstname.errors %}
+                <div class="error">
+                    {{ form.firstname.errors }}
+                </div>
+            {% endif %}
+            
+        </div>
+        <div class="form-group">
+            <label for="id_name">Фамилия:</label>
+            {{ form.lastname }}
+            {% if form.lastname.errors %}
+                <div class="error">
+                    {{ form.lastname.errors }}
+                </div>
+            {% endif %}
+            
+        </div>
+        <div class="form-group">
+            <label for="id_email">Email исполнителя:</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="error">
+                    {{ form.email.errors }}
+                </div>
+            {% endif %}
+        </div>
+          <div class="form-group">
+            <label for="id_username">Логин:</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="error">
+                    {{ form.username.errors }}
+                </div>
+            {% endif %}
+            
+        </div>
+        <div class="form-group">Пароль:</label> 
+            {{ form.password}}
+            {% if form.password.errors %}
+                <div class="error">
+                    {{ form.password.errors }}
+                </div>
+            {% endif %}
+            
+        </div>
+     
+        <button type="submit" class="btn btn-primary">Создать</button>
+    </form>
+{% endblock %}

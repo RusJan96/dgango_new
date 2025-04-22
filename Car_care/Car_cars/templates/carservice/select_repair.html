@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block title %}Выбор вида ремонта{% endblock %}
+
+{% block content %}
+    <h1>Выбор вида ремонта</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.repair_type.label_tag }}
+            {{ form.repair_type }}
+        </div>
+        <button type="submit" class="btn btn-primary">Найти автосервисы</button>
+    </form>
+    {% if services %}
+        <h2>Подходящие автосервисы:</h2>
+        <ul>
+            {% for service in services %}
+                <li>
+                    <a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a> - {{ service.rating }} ({{ service.reviews.count }} отзывов)
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
