@@ -6,10 +6,55 @@
 
 {% block content %}
     <h1>Список автосервисов</h1>
+    <form method="get">
+        <div class="form-group">
+            {{ form.car_brand.label_tag }}
+            {{ form.car_brand }}
+        </div>
+        <div class="form-group">
+            {{ form.car_model.label_tag }}
+            {{ form.car_model }}
+        </div>
+        <div class="form-group">
+            {{ form.repair_type.label_tag }}
+            {{ form.repair_type }}
+        </div>
+        <button type="submit" class="btn btn-primary">Найти</button>
+    </form>
+    <ul>
+        {% for service in services %}
+            <li>
+                <a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a> - {{ service.rating }} ({{ service.reviews.count }} отзывов)
+            </li>
+        {% empty %}
+            <li>Нет доступных автосервисов.</li>
+        {% endfor %}
+    </ul>
+    <div>
+        <a href="?sort=rating">Сортировать по рейтингу</a>
+        <a href="?sort=name">Сортировать по названию</a>
+    </div>
+    <ul>
+        {% for service in services %}
+            <li>
+                <a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a>
+                - Рейтинг: {{ service.rating }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Список автосервисов{% endblock %}
+
+{% block content %}
+    <h1>Список автосервисов</h1>
     <ul>
         {% for service in services %}
             <li><a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a></li>
         {% endfor %}
     </ul>
-{% endblock %}
-
+{% endblock %} {% endcomment %}

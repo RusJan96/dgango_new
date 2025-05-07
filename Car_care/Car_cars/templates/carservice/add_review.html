@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Оставить отзыв{% endblock %}
+
+{% block content %}
+    <h1>Оставить отзыв для {{ service.name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+    <a href="{% url 'service_detail' service.pk %}">Назад к деталям</a>
+{% endblock %}

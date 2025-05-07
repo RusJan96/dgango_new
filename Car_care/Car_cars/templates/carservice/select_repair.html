@@ -1,6 +1,51 @@
 {% extends 'base.html' %}
 {% load static%}
 
+
+{% block title %}Выбор вида ремонта{% endblock %}
+
+{% block content %}
+    <h1>Выбор вида ремонта</h1>
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Найти автосервисы</button>
+    </form>
+    <h2>Подходящие автосервисы:</h2>
+    <ul>
+        {% for service in services %}
+            <li>
+                <a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a> - {{ service.rating }} ({{ service.reviews.count }} отзывов)
+            </li>
+        {% empty %}
+            <li>Нет доступных автосервисов.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+
+{% comment %} {% comment %} {% block title %}Выбор вида ремонта{% endblock %}
+
+{% block content %}
+    <h1>Выбор вида ремонта</h1>
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Найти автосервисы</button>
+    </form>
+    <h2>Подходящие автосервисы:</h2>
+    <ul>
+        {% for service in services %}
+            <li>
+                <a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a> - {{ service.rating }} ({{ service.reviews.count }} отзывов)
+            </li>
+        {% empty %}
+            <li>Нет доступных автосервисов.</li>
+        {% endfor %}
+    </ul>
+{% endblock %} {% endcomment %} {% endcomment %}
+
+{% comment %} 
 {% block title %}Выбор вида ремонта{% endblock %}
 
 {% block content %}
@@ -23,4 +68,4 @@
             {% endfor %}
         </ul>
     {% endif %}
-{% endblock %}
+{% endblock %} {% endcomment %}

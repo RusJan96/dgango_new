@@ -4,6 +4,85 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
+{% block title %}Детали автосервиса{% endblock %}
+
+{% block content %}
+    <h1>{{ service.name }}</h1>
+    <p>Адрес: {{ service.address }}</p>
+    <p>{{ service.description }}</p>
+    <h3>Рейтинг: {{ service.rating }}</h3>
+    <h3>Отзывы:</h3>
+    <ul>
+        {% for review in reviews %}
+            <li>{{ review.user.username }}: {{ review.comment }} ({{ review.rating }}/5) - {{ review.created_at }}</li>
+        {% empty %}
+            <li>Нет отзывов.</li>
+        {% endfor %}
+    </ul>
+    <h3>Виды ремонта и цены:</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Название ремонта</th>
+                <th>Цена</th>
+                <th>Время работы</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for repair in repairs %}
+                <tr>
+                    <td>{{ repair.repair_type.name }}</td>
+                    <td>{{ repair.price }} руб.</td>
+                    <td>{{ repair.duration }} ч</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Оставьте отзыв</h3>
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ review_form.comment.label_tag }}
+                {{ review_form.comment }}
+            </div>
+            <div class="form-group">
+                {{ review_form.rating.label_tag }}
+                {{ review_form.rating }}
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+        </form>
+    {% else %}
+        <p>Чтобы оставить отзыв, <a href="{% url 'login' %}">войдите</a> в систему.</p>
+    {% endif %}
+{% endblock %}
+
+{% comment %} {% block title %}Детали автосервиса{% endblock %}
+
+{% block content %}
+    <h1>{{ service.name }}</h1>
+    <p>Адрес: {{ service.address }}</p>
+    <p>Рейтинг: {{ service.rating }}</p>
+    <h2>Отзывы</h2>
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <p>Рейтинг: {{ review.rating }}</p>
+                <p>{{ review.comment }}</p>
+                <p>Автор: {{ review.user.username }}</p>
+                <p>Дата: {{ review.created_at }}</p>
+            </li>
+        {% empty %}
+            <li>Нет отзывов.</li>
+        {% endfor %}
+    </ul>
+{% endblock %} {% endcomment %}
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+
+
 {% block title %}Детали автосервиса{% endblock %}
 
 {% block content %}
@@ -13,16 +92,92 @@
     <h3>Отзывы:</h3>
     <ul>
         {% for review in reviews %}
-            <li>{{ review.user.username }}: {{ review.comment }} ({{ review.rating }}/5)</li>
+            <li>{{ review.user.username }}: {{ review.comment }} ({{ review.rating }}/5) - {{ review.created_at }}</li>
+        {% empty %}
+            <li>Нет отзывов.</li>
         {% endfor %}
     </ul>
     <h3>Виды ремонта и цены:</h3>
-    <ul>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Название ремонта</th>
+                <th>Цена</th>
+                <th>Время работы</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for repair in repairs %}
+                <tr>
+                    <td>{{ repair.repair_type.name }}</td>
+                    <td>{{ repair.price }} руб.</td>
+                    <td>{{ repair.duration }} ч</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Оставить отзыв:</h3>
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ review_form.comment.label_tag }}
+                {{ review_form.comment }}
+            </div>
+            <div class="form-group">
+                {{ review_form.rating.label_tag }}
+                {{ review_form.rating }}
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+        </form>
+    {% else %}
+        <p>Чтобы оставить отзыв, <a href="{% url 'login' %}">войдите</a> в систему.</p>
+    {% endif %}
+{% endblock %} {% endcomment %}
+
+
+{% comment %} 
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Детали автосервиса{% endblock %}
+
+{% block content %}
+    <h1>{{ service.name }}</h1>
+    <p>{{ service.description }}</p>
+    <h3>Рейтинг: {{ service.rating }}</h3>
+    <h3>Виды ремонта и цены:</h3>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Название ремонта</th>
+                <th>Цена</th>
+                <th>Время работы</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for repair in repairs %}
+                <tr>
+                    <td>{{ repair.repair_type.name }}</td>
+                    <td>{{ repair.price }} руб.</td>
+                    <td>{{ repair.duration }} ч</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>{% comment %} <ul>
         {% for repair in repairs %}
             <li>{{ repair.repair_type.name }} - {{ repair.price }} руб.</li>
         {% endfor %}
+    </ul> {% endcomment %}
+    {% comment %} <h3>Отзывы:</h3>
+    <ul>
+        {% for review in reviews %}
+            <li>{{ review.user.username }}: {{ review.comment }} ({{ review.rating }}/5)</li>
+        {% endfor %}
     </ul>
-{% endblock %}
+    
+{% endblock %} {% endcomment %} 
 
 
 {% comment %} {% extends 'base.html' %}
