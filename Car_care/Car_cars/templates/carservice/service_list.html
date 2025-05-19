@@ -1,6 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Список автосервисов{% endblock %}
+
+{% block content %}
+    <div class="image-slider">
+        <img src="{% static 'images/background1.jpg' %}" alt="Фон 1">
+        <img src="{% static 'images/background2.jpg' %}" alt="Фон 2">
+        <img src="{% static 'images/background3.jpg' %}" alt="Фон 3">
+        <img src="{% static 'images/background4.jpg' %}" alt="Фон 4">
+        <img src="{% static 'images/background5.jpg' %}" alt="Фон 5">
+        <img src="{% static 'images/background6.jpg' %}" alt="Фон 6">
+        <img src="{% static 'images/background7.jpg' %}" alt="Фон 7">
+        <img src="{% static 'images/background8.jpg' %}" alt="Фон 8">
+    </div>
+    <div class="content-container">
+        <h1>Список автосервисов</h1>
+        <form method="get">
+            <div class="form-group">
+                {{ form.car_brand.label_tag }}
+                {{ form.car_brand }}
+            </div>
+            <div class="form-group">
+                {{ form.car_model.label_tag }}
+                {{ form.car_model }}
+            </div>
+            <div class="form-group">
+                {{ form.repair_type.label_tag }}
+                {{ form.repair_type }}
+            </div>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
+        <ul>
+            {% for service in services %}
+                <li>
+                    <a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a> - {{ service.rating }} ({{ service.reviews.count }} отзывов)
+                </li>
+            {% empty %}
+                <li>Нет доступных автосервисов.</li>
+            {% endfor %}
+        </ul>
+        <div>
+            <a href="?sort=rating{% if request.GET.car_brand %}&car_brand={{ request.GET.car_brand }}{% endif %}{% if request.GET.car_model %}&car_model={{ request.GET.car_model }}{% endif %}{% if request.GET.repair_type %}&repair_type={{ request.GET.repair_type }}{% endif %}">Сортировать по рейтингу</a>
+            <a href="?sort=name{% if request.GET.car_brand %}&car_brand={{ request.GET.car_brand }}{% endif %}{% if request.GET.car_model %}&car_model={{ request.GET.car_model }}{% endif %}{% if request.GET.repair_type %}&repair_type={{ request.GET.repair_type }}{% endif %}">Сортировать по названию</a>
+        </div>
+        {% comment %} <div>
+            <a href="?sort=rating">Сортировать по рейтингу</a>
+            <a href="?sort=name">Сортировать по названию</a>
+        </div> {% endcomment %}
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+
 
 {% block title %}Список автосервисов{% endblock %}
 
@@ -33,16 +93,16 @@
     <div>
         <a href="?sort=rating">Сортировать по рейтингу</a>
         <a href="?sort=name">Сортировать по названию</a>
-    </div>
-    <ul>
+    </div> {% endcomment %}
+    {% comment %} <ul>
         {% for service in services %}
             <li>
                 <a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a>
                 - Рейтинг: {{ service.rating }}
             </li>
         {% endfor %}
-    </ul>
-{% endblock %}
+    </ul> {% endcomment %}
+{% comment %} {% endblock %} {% endcomment %}
 
 {% comment %} {% extends 'base.html' %}
 {% load static %}

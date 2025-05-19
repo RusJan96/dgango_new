@@ -33,6 +33,12 @@ def service_list(request):
             # except ServiceRepair.DoesNotExist:
             #     services = services.none()
 
+    sort_by = request.GET.get('sort', 'rating')
+    if sort_by == 'rating':
+        services = services.order_by('-rating')
+    else:
+        services = services.order_by('name')
+
     return render(request, 'carservice/service_list.html', {
         'services': services,
         'form': form,
@@ -40,13 +46,22 @@ def service_list(request):
         'car_model': car_model,
         'repair_type': repair_type
     })
-    sort_by = request.GET.get('sort', 'rating')
-    if sort_by == 'rating':
-        services = Service.objects.all().order_by('-rating')
-    else:
-        services = Service.objects.all()
-    return render(request, 'carservice/service_list.html', {'services': services})
+    
+    # return render(request, 'carservice/service_list.html', {'services': services})
 
+
+    #  # Обработка сортировки
+    # sort_by = request.GET.get('sort', 'name')  # По умолчанию сортируем по названию
+    # if sort_by == 'rating':
+    #     services = services.order_by('-rating', 'name')  # Сортировка по убыванию рейтинга, затем по названию
+    # else:
+    #     services = services.order_by('name')  # Сортировка по названию
+
+    # context = {
+    #     'form': form,
+    #     'services': services,
+    # }
+    # return render(request, 'service_list.html', context)
 
 
 
@@ -173,3 +188,41 @@ def add_review(request, service_id):
     else:
         form = ReviewForm()
     return render(request, 'carservice/add_review.html', {'form': form, 'service': service})
+
+
+
+
+def signup_view(request):
+  if request.method == 'POST':
+    form = SignupForm(request.POST)
+    if form.is_valid():
+      user = form.save(commit=False)
+      user.set_password(form.cleaned_data['password'])  # Хэшируем пароль
+      user.save()
+      return redirect('signin')
+  else:
+    form = SignupForm()
+  return render(request, 'auth/signup.html', {'form': form})    
+
+
+def signin(request):
+  if request.method == "POST":
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+    
+    # Аутентификация пользователя
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+      login(request, user)  # Вход пользователя
+      return redirect('service_list')  # Перенаправление после успешного входа
+    else:
+      # Ошибка входа
+      return render(request, 'auth/signin.html', {'error': 'Неверный логин или пароль'})
+  return render(request, 'auth/signin.html')  
+
+
+def signout(request):
+  # Выходим из системы
+  logout(request)
+  # Перенаправляем пользователя на страницу входа
+  return redirect('signin')

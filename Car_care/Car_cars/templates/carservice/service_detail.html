@@ -54,7 +54,7 @@
             <button type="submit" class="btn btn-primary">Отправить отзыв</button>
         </form>
     {% else %}
-        <p>Чтобы оставить отзыв, <a href="{% url 'login' %}">войдите</a> в систему.</p>
+        {% comment %} <p>Чтобы оставить отзыв, <a href="{% url 'login' %}">войдите</a> в систему.</p> {% endcomment %}
     {% endif %}
 {% endblock %}
 

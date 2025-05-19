@@ -148,7 +148,8 @@ def signup_view(request):
       return redirect('signin')
   else:
     form = SignupForm()
-  return render(request, 'auth/signup.html', {'form': form})
+  return render(request, 'auth/signup.html', {'form': form})    
+
 
 def signin(request):
   if request.method == "POST":
@@ -165,13 +166,12 @@ def signin(request):
       return render(request, 'auth/signin.html', {'error': 'Неверный логин или пароль'})
   return render(request, 'auth/signin.html')  
 
-@login_required
+
 def signout(request):
   # Выходим из системы
   logout(request)
   # Перенаправляем пользователя на страницу входа
   return redirect('signin')
-0
-
 
 # Create your views here.
+

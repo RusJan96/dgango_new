@@ -1,0 +1,88 @@
+{% comment %} {% load static %}
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'service_list' %}">Car Services</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'service_list' %}">Главная</a>
+            </li>
+            {% comment %} <li class="nav-item">
+                <a class="nav-link" href="#">Отзывы</a>
+            </li> {% endcomment %}
+            {% comment %} <li class="nav-item">
+                <a class="nav-link" href="{% url 'service_list' %}">Автосервисы</a>
+            </li> {% endcomment %}
+            {% comment %} <li class="nav-item">
+                <a class="nav-link" href="#">4</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">5</a>
+            </li> {% endcomment %}
+        {% comment %} </ul>
+        <div class="telegram-link">
+            <a href="https://t.me/your_telegram_bot_username" target="_blank">
+                <img src="{% static 'images/telegram.jpg' %}" alt="Telegram Logo" width="30" height="30">
+                <span>Мы в Telegram</span>
+            </a>
+        </div>
+    </div>
+    </div>    
+</nav> {% endcomment %} 
+
+{% load static %}
+
+</ul>
+<div class="ms-auto">
+    {% if user.is_authenticated %}
+        <span class="me-3">{{ user.lastname }} {{ user.firstname }}</span>
+        <a href="{% url 'signout' %}" class="btn btn-dark">Выйти</a>
+    {% else %}
+        <a href="{% url 'signin' %}" class="btn btn-dark">Войти</a>
+    {% endif %}
+</div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <!-- Бренд и бургер-меню -->
+        <a class="navbar-brand" href="{% url 'service_list' %}">Car Services</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Контент навигации -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto"> <!-- mr-auto для выравнивания ссылок слева -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'service_list' %}">Главная</a>
+                </li>
+                {% comment %} <li class="nav-item">
+                    <a class="nav-link" href="#">Отзывы</a>
+                </li> {% endcomment %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'service_list' %}">Автосервисы</a>
+                </li>
+                {% comment %} <li class="nav-item">
+                    <a class="nav-link" href="#">4</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">5</a>
+                </li> {% endcomment %}
+            </ul>
+
+            <!-- Ссылки справа -->
+            <div class="telegram-link ml-auto"> <!-- ml-auto для выравнивания справа -->
+                <a href="https://t.me/Best_Cars_service_bot" target="_blank">
+                    <img src="{% static 'images/telegram.jpg' %}" alt="Telegram Logo" width="30" height="30">
+                    <span>Мы в Telegram</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
