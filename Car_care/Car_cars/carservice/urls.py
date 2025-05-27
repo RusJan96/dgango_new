@@ -1,5 +1,8 @@
+from django.contrib import admin
 from django.urls import path
 from . import views
+# from carservice import views
+
 
 urlpatterns = [
     path('', views.service_list, name='service_list'),

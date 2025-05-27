@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% comment %} от сюда  {% endcomment %}
+{% comment %} {% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Список автосервисов{% endblock %}
@@ -47,13 +49,13 @@
         {% comment %} <div>
             <a href="?sort=rating">Сортировать по рейтингу</a>
             <a href="?sort=name">Сортировать по названию</a>
-        </div> {% endcomment %}
-    </div>
+        {% comment %} </div> {% endcomment %}
+    {% comment %} </div>
 {% endblock %}
 
-
-
-
+ {% endcomment %} 
+{% comment %} 
+до сюда  {% endcomment %}
 
 
 
@@ -118,3 +120,363 @@
         {% endfor %}
     </ul>
 {% endblock %} {% endcomment %}
+
+{% comment %} 
+{% extends 'base.html' %} {% endcomment %}
+{% comment %} {% load static %}
+
+{% block title %}Список автосервисов{% endblock %}
+
+{% block content %}
+    <div class="image-slider">
+        <img src="{% static 'images/background1.jpg' %}" alt="Фон 1">
+        <img src="{% static 'images/background2.jpg' %}" alt="Фон 2">
+        <img src="{% static 'images/background3.jpg' %}" alt="Фон 3">
+        <img src="{% static 'images/background4.jpg' %}" alt="Фон 4">
+        <img src="{% static 'images/background5.jpg' %}" alt="Фон 5">
+        <img src="{% static 'images/background6.jpg' %}" alt="Фон 6">
+        <img src="{% static 'images/background7.jpg' %}" alt="Фон 7">
+        <img src="{% static 'images/background8.jpg' %}" alt="Фон 8">
+    </div>
+    <div class="content-container">
+        <h1>Список автосервисов</h1>
+        <form method="get">
+            <div class="form-group">
+                {{ form.car_brand.label_tag }}
+                {{ form.car_brand }}
+            </div>
+            <div class="form-group">
+                {{ form.car_model.label_tag }}
+                {{ form.car_model }}
+            </div>
+            <div class="form-group">
+                {{ form.repair_type.label_tag }}
+                {{ form.repair_type }}
+            </div>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
+        <table class="services-table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Рейтинг</th>
+                    <th>Отзывы</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                    <tr>
+                        <td>
+                            <div class="service-name">
+                                <a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="service-rating">
+                                {{ service.rating }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="service-reviews">
+                                {{ service.reviews.count }}
+                            </div>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">Нет доступных автосервисов.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="sorting-options">
+            <a href="?sort=rating{% if request.GET.car_brand %}&car_brand={{ request.GET.car_brand }}{% endif %}{% if request.GET.car_model %}&car_model={{ request.GET.car_model }}{% endif %}{% if request.GET.repair_type %}&repair_type={{ request.GET.repair_type }}{% endif %}">Сортировать по рейтингу</a>
+            <a href="?sort=name{% if request.GET.car_brand %}&car_brand={{ request.GET.car_brand }}{% endif %}{% if request.GET.car_model %}&car_model={{ request.GET.car_model }}{% endif %}{% if request.GET.repair_type %}&repair_type={{ request.GET.repair_type }}{% endif %}">Сортировать по названию</a>
+        </div>
+    </div>
+{% endblock %} {% endcomment %}
+
+{% comment %} deepseek  {% endcomment %}
+
+
+{% load static %}
+
+{% block title %}Список автосервисов{% endblock %}
+
+
+    <!-- Слайдер изображений -->
+    <div class="image-slider">
+        <img src="{% static 'images/background1.jpg' %}" alt="Фон 1">
+        <img src="{% static 'images/background2.jpg' %}" alt="Фон 2">
+        <img src="{% static 'images/background3.jpg' %}" alt="Фон 3">
+        <img src="{% static 'images/background4.jpg' %}" alt="Фон 4">
+        <img src="{% static 'images/background5.jpg' %}" alt="Фон 5">
+        <img src="{% static 'images/background6.jpg' %}" alt="Фон 6">
+        <img src="{% static 'images/background7.jpg' %}" alt="Фон 7">
+        <img src="{% static 'images/background8.jpg' %}" alt="Фон 8">
+    </div>
+
+    <!-- Основной контент -->
+    <div class="content-container">
+       
+        {% block content %}
+    <!-- Приветственный блок -->
+     
+    <div class="welcome-block">
+        <div class="container">
+            <div class="welcome-content">
+                <div class="welcome-text">
+                    <h1>Добро пожаловать на сайт по подбору автосервисов</h1>
+                    
+                    <div class="telegram-promo">
+                        <p>Если вы хотите зарегистрировать свой автосервис, напишите нам в Telegram: <a href="https://t.me/Best_Cars_service_bot">
+                         {% comment %} target="_blank" class="telegram-link"> {% endcomment %}
+                            <img src="{% static 'images/telegram.jpg' %}" alt="Telegram" width="24" height="24">
+                            <span>Мы в Telegram</span></p>
+                        </a>
+                    </div>
+                    
+                    
+                       {%comment%} <p>Конечно, сейчас очень много автосервисов, но тут мы подбираем самые качественные и хорошие автосервисы по рейтингу и отзывам клиентов.</p>
+                        <p>Вы можете по марке автомобиля и виду ремонта подобрать наиболее удобный для вас автосервис по рейтингу и цене. Надеемся, что наш сайт вам в этом поможет.</p>
+                    </div> {% endcomment %}
+                </div>
+                <div class="welcome-image">
+                    <img src="{% static 'images/тачка2.jpeg' %}" alt="Автосервис">
+                    <img src="{% static 'images/презентация3.jpeg' %}" alt="Автосервис">
+                    {% comment %} <img src="{% static 'images/background6.jpg' %}" alt="Автосервис"> {% endcomment %}
+            
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <h1>Список автосервисов</h1>
+        <form method="get">
+            <div class="form-group">
+                {{ form.car_brand.label_tag }}
+                {{ form.car_brand }}
+            </div>
+            <div class="form-group">
+                {{ form.car_model.label_tag }}
+                {{ form.car_model }}
+            </div>
+            <div class="form-group">
+                {{ form.repair_type.label_tag }}
+                {{ form.repair_type }}
+            </div>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
+        
+        <table class="services-table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Рейтинг</th>
+                    <th>Отзывы</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                    <tr>
+                        <td>
+                            <div class="service-name">
+                                <a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="service-rating">
+                                {{ service.rating }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="service-reviews">
+                                {{ service.reviews.count }}
+                            </div>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">Нет доступных автосервисов.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="sorting-options">
+            <a href="?sort=rating{% if request.GET.car_brand %}&car_brand={{ request.GET.car_brand }}{% endif %}{% if request.GET.car_model %}&car_model={{ request.GET.car_model }}{% endif %}{% if request.GET.repair_type %}&repair_type={{ request.GET.repair_type }}{% endif %}">Сортировать по рейтингу</a>
+            {% comment %} <a href="?sort=name{% if request.GET.car_brand %}&car_brand={{ request.GET.car_brand }}{% endif %}{% if request.GET.car_model %}&car_model={{ request.GET.car_model }}{% endif %}{% if request.GET.repair_type %}&repair_type={{ request.GET.repair_type }}{% endif %}">Сортировать по названию</a> {% endcomment %}
+        </div>
+    </div>
+
+    <div class="container-fluid bg-light py-4 mt-5">
+        <div class="container">
+            <h3 class="text-center mb-4">🏆 Лучшие автосервисы</h3>
+            <div class="row">
+                <!-- Баннер 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Elite Auto Service</h5>
+                        </div>
+                        <div class="card-body">
+                            <img src="{% static 'images/banner1.png' %}" class="img-fluid banner-image mb-3" alt="Elite Auto Service">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-success">Рейтинг: 9.91</span>
+                                <span class="text-muted">⭐ 256 отзывов в 2Гис</span>
+                            </div>
+                            <p>Профессиональный сервис для премиальных автомобилей</p>
+                            <a href="{% url 'service_detail' 6 %}" class="btn btn-outline-primary w-100">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Баннер 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">Fast & Reliable</h5>
+                        </div>
+                        <div class="card-body">
+                            <img src="{% static 'images/banner.jpeg' %}" class="img-fluid banner-image mb-3" alt="Fast & Reliable">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-success">Рейтинг: 9.9</span>
+                                <span class="text-muted">⭐ 189 отзывов в 2Гис</span>
+                            </div>
+                            <p>Быстрый и качественный ремонт за разумные деньги</p>
+                            <a href="{% url 'service_detail' 5 %}" class="btn btn-outline-warning w-100">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Баннер 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0">Family Garage</h5>
+                        </div>
+                        <div class="card-body">
+                            <img src="{% static 'images/banner2.jpg' %}" class="img-fluid banner-image mb-3" alt="Family Garage">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-success">Рейтинг: 9.7</span>
+                                <span class="text-muted">⭐ 312 отзывов в 2Гис</span>
+                            </div>
+                            <p>Доверьте свой автомобиль проверенным специалистам</p>
+                            <a href="{% url 'service_detail' 3 %}" class="btn btn-outline-danger w-100">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for service in top_services %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header" style="background-color: {{ service.theme_color }};">
+                        <h5 class="mb-0 text-white">{{ service.name }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <img src="{{ service.image.url }}" class="img-fluid banner-image mb-3" alt="{{ service.name }}">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="badge bg-success">Рейтинг: {{ service.rating }}</span>
+                            <span class="text-muted">⭐ {{ service.reviews_count }} отзывов</span>
+                        </div>
+                        <p>{{ service.short_description }}</p>
+                        <a href="{% url 'service_detail' service.id %}" class="btn btn-outline-primary w-100">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% comment %} <div class="container-fluid bg-light py-4 mt-5">
+        <div class="container">
+            <h3 class="text-center mb-4">🏆 Лучшие автосервисы</h3>
+            <div class="row">
+                <!-- Баннер 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Elite Auto Service</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="banner-image-container">
+                                <img src="{% static 'images/banner1.png' %}" class="img-fluid banner-image" alt="Elite Auto Service">
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-success">Рейтинг: 9.9</span>
+                                <span class="text-muted">⭐ 256 отзывов</span>
+                            </div>
+                            <p>Профессиональный сервис для премиальных автомобилей</p>
+                            <a href="{% url 'service_detail' 6 %}" class="btn btn-outline-primary w-100">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Баннер 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">Fast & Reliable</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="banner-image-container">
+                                <img src="{% static 'images/banner.jpeg' %}" class="img-fluid banner-image" alt="Fast & Reliable">
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-success">Рейтинг: 9.7</span>
+                                <span class="text-muted">⭐ 189 отзывов</span>
+                            </div>
+                            <p>Быстрый и качественный ремонт за разумные деньги</p>
+                            <a href="{% url 'service_detail' 5 %}" class="btn btn-outline-warning w-100">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Баннер 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0">Family Garage</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="banner-image-container">
+                                <img src="{% static 'images/banner2.jpg' %}" class="img-fluid banner-image" alt="Family Garage">
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-success">Рейтинг: 9.5</span>
+                                <span class="text-muted">⭐ 312 отзывов</span>
+                            </div>
+                            <p>Доверьте свой автомобиль проверенным специалистам</p>
+                            <a href="{% url 'service_detail' 2 %}" class="btn btn-outline-danger w-100">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        {% for service in top_services %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header" style="background-color: {{ service.theme_color }};">
+                    <h5 class="mb-0 text-white">{{ service.name }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="banner-image-container">
+                        <img src="{{ service.image.url }}" class="img-fluid banner-image" alt="{{ service.name }}">
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="badge bg-success">Рейтинг: {{ service.rating }}</span>
+                        <span class="text-muted">⭐ {{ service.reviews_count }} отзывов</span>
+                    </div>
+                    <p>{{ service.short_description }}</p>
+                    <a href="{% url 'service_detail' service.id %}" class="btn btn-outline-primary w-100">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div> {% endcomment %}
+{% endblock %}

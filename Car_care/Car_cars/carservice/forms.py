@@ -1,5 +1,7 @@
 from django import forms
 from .models import RepairType, CarBrand, CarModel, AutoService, Review, ServiceRepair, Review
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 class ServiceRepairForm(forms.ModelForm):
     class Meta:
@@ -111,6 +113,100 @@ class ReviewForm(forms.ModelForm):
 #       }),
 #     }
 # class SignupForm(forms.ModelForm):
+
+# дип сик 
+class SignupForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+        
+        labels = {
+            'first_name': 'Имя',
+            'last_name': 'Фамилия',
+            'username': 'Имя пользователя',
+            'email': 'Почта',
+            'password1': 'Пароль',
+            'password2': 'Подтверждение пароля'
+        }
+        
+        widgets = {
+            'first_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите ваше имя',
+                'autofocus': True  # Автофокус на это поле при загрузке
+            }),
+            'last_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите вашу фамилию'
+            }),
+            'username': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Придумайте логин'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'example@mail.com'
+            }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Настройка полей паролей
+        self.fields['password1'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Не менее 8 символов'
+        })
+        self.fields['password2'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Повторите пароль'
+        })
+        
+        # Убираем ВСЕ вспомогательные тексты
+        for field in self.fields.values():
+            field.help_text = None
+            field.widget.attrs['aria-describedby'] = ''
+
+# class SignupForm(UserCreationForm):
+#     class Meta:
+#         model = User
+#         fields = ['username', 'email', 'password1', 'password2']
+        
+#         labels = {
+#             'username': 'Логин',
+#             'email': 'Почта',
+#             'password1': 'Пароль',
+#             'password2': 'Подтверждение пароля'
+#         }
+        
+#         widgets = {
+#             'username': forms.TextInput(attrs={
+#                 'class': 'form-control',
+#                 'placeholder': 'Введите логин'
+#             }),
+#             'email': forms.EmailInput(attrs={
+#                 'class': 'form-control',
+#                 'placeholder': 'Введите почту'
+#             }),
+#         }
+
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         # Настройка полей паролей
+#         self.fields['password1'].widget.attrs.update({
+#             'class': 'form-control',
+#             'placeholder': 'Введите пароль'
+#         })
+#         self.fields['password2'].widget.attrs.update({
+#             'class': 'form-control',
+#             'placeholder': 'Подтвердите пароль'
+#         })
+        
+#         # Убираем ВСЕ вспомогательные тексты
+#         for field in self.fields.values():
+#             field.help_text = None
+#             field.widget.attrs['aria-describedby'] = ''  # Убираем связь с подсказками
+
+# class SignupForm(UserCreationForm):
 #   confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
 #     'class': 'form-control',
 #     'id': 'floatingPasswordConfirm',
@@ -120,16 +216,16 @@ class ReviewForm(forms.ModelForm):
 
 #   class Meta:
 #     model = User
-#     fields = ['firstname', 'lastname', 'username', 'email', 'password']
+#     fields = ['first_name', 'last_name', 'username', 'email', 'password']
 
 #     widgets = {
-#       'firstname': forms.TextInput(attrs={
+#       'first_name': forms.TextInput(attrs={
 #         'class': 'form-control',
 #         'id': 'floatingTitle',
 #         'placeholder': 'Очень простая задача',
 #         'required': True
 #       }),
-#       'lastname': forms.TextInput(attrs={
+#       'last_name': forms.TextInput(attrs={
 #         'class': 'form-control',
 #         'id': 'floatingLastname',
 #         'aria-label': 'Фамилия',
@@ -168,10 +264,43 @@ class ReviewForm(forms.ModelForm):
 
 
 
+# Ии предлогает такую форму 
+# class SignupForm(UserCreationForm):
+#     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
+#     first_name = forms.CharField(required=True, max_length=30, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'}))
+#     last_name = forms.CharField(required=True, max_length=30, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Фамилия'}))
+
+#     class Meta:
+#         model = User
+#         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+#         widgets = {
+#             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя пользователя'}),
+#             'password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль'}),
+#             'password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Подтверждение пароля'}),
+#         }
+#     def clean(self):
+#     cleaned_data = super().clean()
+#     password = cleaned_data.get('password')
+#     confirm_password = cleaned_data.get('confirm_password')
+#     if password != confirm_password:
+#       raise forms.ValidationError('Пароли не совпадают!')
+#     return cleaned_data
 
 
 
+# class SignupForm(UserCreationForm):
+#     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}))
+#     first_name = forms.CharField(required=True, max_length=30, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'}))
+#     last_name = forms.CharField(required=True, max_length=30, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Фамилия'}))
 
+#     class Meta:
+#         model = User  # Правильный импорт
+#         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+#         widgets = {
+#             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя пользователя'}),
+#             'password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль'}),
+#             'password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Подтверждение пароля'}),
+#         }
 
 
 

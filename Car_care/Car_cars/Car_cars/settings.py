@@ -131,3 +131,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 TELEGRAM_BOT_TOKEN = '7942582757:AAHhO_vAUbO9_D0kpAIiq0SzOBUXNwcUsxY'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]

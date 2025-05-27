@@ -1,9 +1,45 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import AutoService, RepairType, ServiceRepair, CarBrand, CarModel, Review
-from .forms import ServiceSearchForm, ReviewForm
+from .forms import ServiceSearchForm, ReviewForm, SignupForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib.auth import authenticate, login, logout 
 
+
+def signup_view(request):
+  if request.method == 'POST':
+    form = SignupForm(request.POST)
+    if form.is_valid():
+      user = form.save(commit=False)
+      user.set_password(form.cleaned_data['password'])  # Хэшируем пароль
+      user.save()
+      return redirect('signin')
+  else:
+    form = SignupForm()
+  return render(request, 'auth/signup.html', {'form': form})    
+
+
+def signin(request):
+  if request.method == "POST":
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+    
+    # Аутентификация пользователя
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+      login(request, user)  # Вход пользователя
+      return redirect('service_list')  # Перенаправление после успешного входа
+    else:
+      # Ошибка входа
+      return render(request, 'auth/signin.html', {'error': 'Неверный логин или пароль'})
+  return render(request, 'auth/signin.html')  
+
+
+def signout(request):
+  # Выходим из системы
+  logout(request)
+  # Перенаправляем пользователя на страницу входа
+  return redirect('signin')
 
 def service_list(request):
     form = ServiceSearchForm(request.GET)
@@ -22,16 +58,12 @@ def service_list(request):
         if car_model:
             services = services.filter(car_models=car_model)
         if repair_type:
-        #    try:
-                service_repair = ServiceRepair.objects.filter(repair_type=repair_type)
-                auto_services = set()
-                for repair in service_repair:
-                    auto_services.add(repair.service)
-
-                auto_services = list(auto_services)
-                services = auto_services
-            # except ServiceRepair.DoesNotExist:
-            #     services = services.none()
+            # Получаем ID сервисов, которые предоставляют этот тип ремонта
+            service_ids = ServiceRepair.objects.filter(
+                repair_type=repair_type
+            ).values_list('service_id', flat=True)
+            # Фильтруем основной QuerySet
+            services = services.filter(id__in=service_ids)
 
     sort_by = request.GET.get('sort', 'rating')
     if sort_by == 'rating':
@@ -46,10 +78,59 @@ def service_list(request):
         'car_model': car_model,
         'repair_type': repair_type
     })
+# начало переделывания от deepseek
+# def service_list(request):
+#     form = ServiceSearchForm(request.GET)
+#     services = AutoService.objects.all()
+#     car_brand = None
+#     car_model = None
+#     repair_type = None
+
+#     if form.is_valid():
+#         car_brand = form.cleaned_data.get('car_brand')
+#         car_model = form.cleaned_data.get('car_model')
+#         repair_type = form.cleaned_data.get('repair_type')
+
+#         if car_brand:
+#             services = services.filter(car_brands=car_brand)
+#         if car_model:
+#             services = services.filter(car_models=car_model)
+#         if repair_type:
+#         #    try:
+#                 service_repair = ServiceRepair.objects.filter(repair_type=repair_type)
+#                 auto_services = set()
+#                 for repair in service_repair:
+#                     auto_services.add(repair.service)
+
+#                 auto_services = list(auto_services)
+#                 services = auto_services
+#             # except ServiceRepair.DoesNotExist:
+#             #     services = services.none()
+
+#     sort_by = request.GET.get('sort', 'rating')
+#     if sort_by == 'rating':
+#         services = services.order_by('-rating')
+#     else:
+#         services = services.order_by('name')
+
+#     return render(request, 'carservice/service_list.html', {
+#         'services': services,
+#         'form': form,
+#         'car_brand': car_brand,
+#         'car_model': car_model,
+#         'repair_type': repair_type
+#     })
     
-    # return render(request, 'carservice/service_list.html', {'services': services})
+#     return render(request, 'carservice/service_list.html', {'services': services})
+    # конец
+ 
 
 
+
+
+
+
+ 
     #  # Обработка сортировки
     # sort_by = request.GET.get('sort', 'name')  # По умолчанию сортируем по названию
     # if sort_by == 'rating':
@@ -192,37 +273,3 @@ def add_review(request, service_id):
 
 
 
-def signup_view(request):
-  if request.method == 'POST':
-    form = SignupForm(request.POST)
-    if form.is_valid():
-      user = form.save(commit=False)
-      user.set_password(form.cleaned_data['password'])  # Хэшируем пароль
-      user.save()
-      return redirect('signin')
-  else:
-    form = SignupForm()
-  return render(request, 'auth/signup.html', {'form': form})    
-
-
-def signin(request):
-  if request.method == "POST":
-    username = request.POST.get("username")
-    password = request.POST.get("password")
-    
-    # Аутентификация пользователя
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-      login(request, user)  # Вход пользователя
-      return redirect('service_list')  # Перенаправление после успешного входа
-    else:
-      # Ошибка входа
-      return render(request, 'auth/signin.html', {'error': 'Неверный логин или пароль'})
-  return render(request, 'auth/signin.html')  
-
-
-def signout(request):
-  # Выходим из системы
-  logout(request)
-  # Перенаправляем пользователя на страницу входа
-  return redirect('signin')

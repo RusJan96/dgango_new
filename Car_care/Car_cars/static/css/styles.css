@@ -1,4 +1,422 @@
- .telegram-link {
+
+/* Стили для рекламных баннеров */
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.card-header {
+    font-weight: 600;
+    border-bottom: none;
+}
+
+.badge {
+    font-size: 0.9rem;
+    padding: 0.5em 0.75em;
+}
+
+.banner-image {
+    height: 350px;
+    width: 150%;
+    object-fit: cover;
+}
+/* Стили для рекламных баннеров */
+/* .bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.card-header {
+    font-weight: 600;
+    border-bottom: none;
+}
+
+.badge {
+    font-size: 0.9rem;
+    padding: 0.5em 0.75em;
+} */
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 20px;
+    }
+}
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Основные стили */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Слайдер фона */
+.image-slider-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.image-slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.image-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: slide 32s infinite;
+}
+
+.image-slider img:nth-child(1) { animation-delay: 0s; }
+.image-slider img:nth-child(2) { animation-delay: 4s; }
+.image-slider img:nth-child(3) { animation-delay: 8s; }
+.image-slider img:nth-child(4) { animation-delay: 12s; }
+.image-slider img:nth-child(5) { animation-delay: 16s; }
+.image-slider img:nth-child(6) { animation-delay: 20s; }
+.image-slider img:nth-child(7) { animation-delay: 24s; }
+.image-slider img:nth-child(8) { animation-delay: 28s; }
+
+@keyframes slide {
+    0% { opacity: 0; }
+    5% { opacity: 1; }
+    25% { opacity: 1; }
+    30% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.image-slider-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+/* Приветственный блок */
+.welcome-block {
+    background-color: rgba(248, 249, 250, 0.95);
+    padding: 3rem 2rem;
+    margin: 2rem auto;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1200px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.welcome-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.welcome-text {
+    flex: 1;
+}
+
+.welcome-image {
+    flex: 1;
+    text-align: center;
+}
+
+.welcome-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.welcome-block h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.telegram-promo {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.telegram-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #0088cc;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.telegram-link:hover {
+    background-color: #006699;
+}
+
+.telegram-link img {
+    margin-right: 0.5rem;
+    width: 24px;
+    height: 24px;
+}
+
+.welcome-description p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+
+
+/* Формы и таблицы */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.services-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+.services-table th, 
+.services-table td {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.services-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.services-table tr:hover {
+    background-color: #f8f8f8;
+}
+
+.sorting-options {
+    margin-top: 2rem;
+}
+
+.sorting-options a {
+    margin-right: 1rem;
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sorting-options a:hover {
+    text-decoration: underline;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 992px) {
+    .welcome-content {
+        flex-direction: column;
+    }
+    
+    .welcome-block h1 {
+        font-size: 2rem;
+    }
+    
+    .telegram-promo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .welcome-block,
+    .content-container {
+        width: 95%;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .welcome-block h1 {
+        font-size: 1.8rem;
+    }
+    
+    .services-table th,
+    .services-table td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+/* Убираем старые стили для .telegram-link */
+.telegram-link {
+    position: static !important; /* Убираем absolute позиционирование */
+    display: inline-flex !important;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #0088cc;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+}
+
+/* Исправляем стили для приветственного блока */
+.welcome-block {
+    /* background-color: rgba(248, 249, 250, 0.9) !important; Добавляем прозрачность */
+    background-color: rgba(248, 249, 250, 0.9) !important;
+    padding: 3rem 0;
+    margin: 20px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.welcome-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 0 20px;
+}
+
+.welcome-text {
+    flex: 1;
+}
+
+.welcome-image {
+    flex: 1;
+    text-align: center;
+}
+
+.welcome-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.welcome-block h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.telegram-promo {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.welcome-description p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .welcome-content {
+        flex-direction: column;
+    }
+    
+    .welcome-block h1 {
+        font-size: 2rem;
+    }
+    
+    .telegram-promo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Основные стили для контента */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* .content-container {
+    background: rgba(255, 255, 255, 0.8);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+} */
+
+/* Слайдер изображений (фон) */
+.image-slider-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.image-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: slide 32s infinite;
+}
+
+/* Остальные стили для слайдера остаются без изменений */
+
+
+
+/* .telegram-link {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -18,7 +436,90 @@
     margin-right: 5px;
 }
 
-body {
+/* Стили для приветственного блока */
+/* .welcome-block {
+    background-color: #f8f9fa;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.welcome-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.welcome-text {
+    flex: 1;
+}
+
+.welcome-image {
+    flex: 1;
+    text-align: center;
+}
+
+.welcome-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.welcome-block h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.telegram-promo {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.telegram-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #0088cc;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.telegram-link:hover {
+    background-color: #006699;
+}
+
+.telegram-link img {
+    margin-right: 0.5rem;
+}
+
+.welcome-description p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Адаптация для мобильных */
+/* @media (max-width: 768px) {
+    .welcome-content {
+        flex-direction: column;
+    }
+    
+    .welcome-block h1 {
+        font-size: 2rem;
+    }
+    
+    .telegram-promo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+} */
+/* body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -27,10 +528,10 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-} 
+}  */
 
 /* Контейнер для контента */
- .content-container {
+ /* .content-container {
     position: relative;
     z-index: 1;
     background: rgba(255, 255, 255, 0.8);
@@ -38,7 +539,8 @@ body {
     padding: 20px;
     border-radius: 10px;
     flex: 1;
-} 
+}  */ 
+
 /* Слайдер изображений */
 /* .image-slider {
     position: fixed;
@@ -181,7 +683,7 @@ a:hover {
 }
 
 /* Контейнер для контента */
-.content-container {
+/* .content-container {
     position: relative;
     z-index: 1;
     background: rgba(255, 255, 255, 0.8);
@@ -189,13 +691,81 @@ a:hover {
     padding: 20px;
     border-radius: 10px;
     flex: 1;
+} */
+ /* номер один не плохо! */
+/* .content-container {
+    background: rgba(255, 255, 255, 0.9);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem;
+    border-radius: 10px;
+    width: calc(100% - 5%); 
+    max-width: 1200px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    box-sizing: border-box;} */
+
+/* Основной контент */
+.content-container {
+    background: rgba(255, 255, 255, 0.9);
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin: 2rem auto;
+    padding: 2rem ;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1400px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
-/* Хедер и футер */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Если используете Bootstrap, можно добавить: */
+.container-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 5%; /* Симметричные отступы */
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }}
+    
+    /* Если используете Bootstrap, можно добавить: */
+    .container-wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 0 5%; /* Симметричные отступы */
+    }
+
+
+
+
+
+
+
+
+
+
+
+/* Хедер и футер
 header, footer {
     position: relative;
     z-index: 2;
-}
+} */
 
 /* Стили для формы и списка */
 form {
@@ -214,6 +784,7 @@ li {
 a {
     text-decoration: none;
     color: #007BFF;
+    
 }
 
 a:hover {
@@ -221,13 +792,122 @@ a:hover {
 }
 
 /* Стили для футера */
+ /* .footer {
+    border-top: 1px solid #0a0a0a0c; 
+    /* border-top: 1px solid black;*/
+  /*  background-color: #f0f0f0; ;
+    padding: 10px 0;
+    text-align: center;
+}  */
 .footer {
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid black;
+    background-color: #333333; /* Темно-серый */
+    color: white; /* Белый текст для лучшей читаемости */
     padding: 10px 0;
     text-align: center;
 }
 
+/* .footer {
+    border-top: 1px solid black;
+    background-color: #f0f0f0; 
+    padding: 10px 0;
+    text-align: center;
+} */
+
 .created-for, .author {
     font-size: 0.9rem;
     color: #555;
+}
+.services-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.services-table th, .services-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.services-table th {
+    background-color: #f4f4f4;
+}
+
+.services-table tr:hover {
+    background-color: #f8f8f8;
+}
+
+.sorting-options {
+    margin-top: 20px;
+}
+
+.sorting-options a {
+    margin-right: 15px;
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.sorting-options a:hover {
+    text-decoration: underline;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.service-name {
+    margin-bottom: 5px;
+}
+
+.service-rating {
+    margin-bottom: 5px;
+}
+
+.service-reviews {
+    margin-bottom: 5px;
+}
+
+/* Стили для хедера и футера */
+header, footer {
+    position: relative;
+    z-index: 2;
+    background-color: #f5f5f5; /* Светло-серый фон */
+    border-top: 1px solid #e0e0e0; /* Светлая граница для хедера */
+    border-bottom: 1px solid #e0e0e0; /* Светлая граница для футера */
+    padding: 1rem 0;
+}
+
+/* Специфичные стили для футера */
+.footer {
+    border-top: 1px solid #d0d0d0; /* Сероватая граница */
+    background-color: #f5f5f5; /* Светло-серый фон */
+    color: #333; /* Темно-серый текст для лучшей читаемости */
+    padding: 1.5rem 0;
+    margin-top: 2rem; /* Отступ от основного контента */
+}
+
+/* Стили для текста в футере */
+.created-for, .author {
+    font-size: 0.9rem;
+    color: #666; /* Серый цвет текста */
+    margin: 0.5rem 0;
+}
+
+/* Дополнительные стили для хедера (если нужно) */
+.navbar {
+    background-color: #f5f5f5 !important; /* Переопределение Bootstrap */
+    padding: 0.8rem 1rem;
+}
+
+/* Стили для ссылок в футере (если будут) */
+.footer a {
+    color: #555; /* Цвет ссылок */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #222; /* Цвет при наведении */
+    text-decoration: underline;
 }
