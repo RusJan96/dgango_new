@@ -5,18 +5,33 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout 
 
-
 def signup_view(request):
-  if request.method == 'POST':
-    form = SignupForm(request.POST)
-    if form.is_valid():
-      user = form.save(commit=False)
-      user.set_password(form.cleaned_data['password'])  # Хэшируем пароль
-      user.save()
-      return redirect('signin')
-  else:
-    form = SignupForm()
-  return render(request, 'auth/signup.html', {'form': form})    
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            # Убедитесь, что имя поля соответствует вашему SignupForm
+            password = form.cleaned_data.get('password1')  # Обычно 'password1' в Django формах
+            if password:
+                user.set_password(password)
+            user.save()
+            return redirect('signin')
+    else:
+        form = SignupForm()
+    return render(request, 'auth/signup.html', {'form': form})
+
+
+# def signup_view(request):
+#   if request.method == 'POST':
+#     form = SignupForm(request.POST)
+#     if form.is_valid():
+#       user = form.save(commit=False)
+#       user.set_password(form.cleaned_data['password'])  # Хэшируем пароль
+#       user.save()
+#       return redirect('signin')
+#   else:
+#     form = SignupForm()
+#   return render(request, 'auth/signup.html', {'form': form})    
 
 
 def signin(request):
